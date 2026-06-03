@@ -1,0 +1,11 @@
+com\pawwwy\portal\controller\PortalController.class
+com\pawwwy\portal\model\GroupInfo.class
+com\pawwwy\portal\config\SecurityConfig.class
+com\pawwwy\portal\config\CorsConfig.class
+com\pawwwy\portal\model\Member.class
+com\pawwwy\portal\PortalApplication.class
+com\pawwwy\portal\config\ModuleUrlProperties.class
+com\pawwwy\portal\model\Module.class
+com\pawwwy\portal\service\ModuleRegistry.class
+com\pawwwy\portal\config\SpaFallbackConfig.class
+com\pawwwy\portal\controller\PortalController$Health.class

@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Pawwwy — design tokens
+
+   Refined-minimal warm palette. Light = cream + warm-dark ink. Dark = warm
+   near-black + warm off-white ink. A single terracotta accent carries through.
+
+   Tokens are RGB triplets (no `rgb()` wrapper) so Tailwind's `<alpha-value>`
+   syntax works for opacity utilities like `bg-canvas/80`.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@layer base {
+  :root {
+    /* Light theme */
+    --canvas:        250 247 242;   /* #FAF7F2  warm cream */
+    --surface:       245 240 232;   /* #F5F0E8  one step in */
+    --elevated:      255 252 247;   /* #FFFCF7  cards on cream */
+
+    --ink:            31  26  23;   /* #1F1A17  warm near-black */
+    --ink-muted:      79  70  64;   /* #4F4640 */
+    --ink-faint:     141 128 117;   /* #8D8075 */
+
+    --line:          228 220 208;   /* #E4DCD0 */
+    --line-strong:   210 198 182;   /* #D2C6B6 */
+
+    --accent:        201 123  92;   /* #C97B5C  terracotta */
+    --accent-soft:   232 196 178;   /* #E8C4B2 */
+  }
+
+  .dark {
+    /* Dark theme */
+    --canvas:         19  17  15;   /* #13110F  warm near-black */
+    --surface:        28  25  22;   /* #1C1916 */
+    --elevated:       34  30  26;   /* #221E1A */
+
+    --ink:           242 237 230;   /* #F2EDE6  warm off-white */
+    --ink-muted:     193 184 173;   /* #C1B8AD */
+    --ink-faint:     130 120 110;   /* #82786E */
+
+    --line:           54  48  42;   /* #36302A */
+    --line-strong:    74  66  58;   /* #4A423A */
+
+    --accent:        217 145 113;   /* #D99171  slightly brighter on dark */
+    --accent-soft:    90  60  48;   /* #5A3C30 */
+  }
+
+  html {
+    /* Make CSS variables follow system pref unless overridden by .dark */
+    color-scheme: light dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-feature-settings: "ss01", "cv11";  /* Geist alternates for refined feel */
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  /* Sensible focus outline — visible but not jarring */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgb(var(--accent) / 0.25);
+    color: rgb(var(--ink));
+  }
+
+  /* Better default link styling — let components override */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  /* Reusable "minimal card" — used by module cards, member cards, etc. */
+  .card-minimal {
+    @apply bg-elevated border border-line rounded-lg transition-all duration-300;
+  }
+
+  .card-minimal:hover {
+    @apply border-line-strong;
+    transform: translateY(-2px);
+  }
+
+  /* Pawwwy wordmark — Fraunces, tight, characterful */
+  .wordmark {
+    @apply font-display font-semibold tracking-tightest;
+    font-variation-settings: "opsz" 144;
+  }
+}
+
+@layer utilities {
+  /* Containers we use across pages */
+  .container-page {
+    @apply mx-auto w-full max-w-page px-6 sm:px-8 lg:px-12;
+  }
+
+  /* Subtle dotted texture — optional atmosphere for hero */
+  .texture-dots {
+    background-image: radial-gradient(rgb(var(--ink) / 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}

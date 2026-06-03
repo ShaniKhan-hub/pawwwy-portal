@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Same warm-neutral foundation as the portal */
+    --canvas:        250 247 242;
+    --surface:       245 240 232;
+    --elevated:      255 252 247;
+
+    --ink:            31  26  23;
+    --ink-muted:      79  70  64;
+    --ink-faint:     141 128 117;
+
+    --line:          228 220 208;
+    --line-strong:   210 198 182;
+
+    /* Module's own accent — muted blue, distinct from the portal's terracotta */
+    --accent:        106 127 191;   /* #6A7FBF */
+    --accent-soft:   206 215 234;   /* #CED7EA */
+
+    /* Status semantics */
+    --paid:          82 132 92;     /* warm-leaning green */
+    --unpaid:        180 110 78;    /* warm-leaning amber */
+  }
+
+  .dark {
+    --canvas:         19  17  15;
+    --surface:        28  25  22;
+    --elevated:       34  30  26;
+
+    --ink:           242 237 230;
+    --ink-muted:     193 184 173;
+    --ink-faint:     130 120 110;
+
+    --line:           54  48  42;
+    --line-strong:    74  66  58;
+
+    --accent:        135 152 207;   /* a touch brighter on dark */
+    --accent-soft:    52  62  88;
+
+    --paid:          120 168 130;
+    --unpaid:        212 145 110;
+  }
+
+  html {
+    color-scheme: light dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-feature-settings: "ss01", "cv11";
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent) / 0.25);
+    color: rgb(var(--ink));
+  }
+}
+
+@layer components {
+  .card-minimal {
+    @apply bg-elevated border border-line rounded-lg;
+  }
+
+  /* Form controls — quiet, consistent */
+  .input-minimal {
+    @apply h-10 px-3 bg-elevated border border-line rounded-md text-sm text-ink
+           placeholder:text-ink-faint
+           focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20
+           transition-colors;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 h-10 px-4 rounded-md text-sm font-medium
+           bg-accent text-canvas
+           hover:bg-accent/90
+           transition-colors;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 h-10 px-3 rounded-md text-sm
+           text-ink-muted hover:text-ink hover:bg-surface
+           transition-colors;
+  }
+
+  .btn-icon {
+    @apply inline-flex items-center justify-center h-8 w-8 rounded-md
+           text-ink-faint hover:text-ink hover:bg-surface
+           transition-colors;
+  }
+
+  .pill-paid {
+    @apply inline-flex items-center gap-1.5 text-xs font-medium
+           px-2 py-0.5 rounded-full text-paid;
+    background-color: rgb(var(--paid) / 0.12);
+  }
+
+  .pill-unpaid {
+    @apply inline-flex items-center gap-1.5 text-xs font-medium
+           px-2 py-0.5 rounded-full text-unpaid;
+    background-color: rgb(var(--unpaid) / 0.12);
+  }
+}
+
+@layer utilities {
+  .container-page {
+    @apply mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .tnum { font-variant-numeric: tabular-nums; }
+}
