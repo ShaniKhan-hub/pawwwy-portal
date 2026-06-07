@@ -29,8 +29,8 @@ public class SecurityConfig {
                                         "http://localhost:5173 " +
                                         // Portal local prod (Spring Boot serving built React)
                                         "http://localhost:8090 " +
-                                        // Portal deployed — change to your real Render URL
-                                        "https://pawwwy-portal.onrender.com"
+                                        // Portal deployed on Render
+                                        "https://pawwwy.onrender.com"
                         ))
                 );
         return http.build();
